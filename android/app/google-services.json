@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1075076269663",
+    "project_id": "maze-conquest-api",
+    "storage_bucket": "maze-conquest-api.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075076269663:android:2be9dc75c759ed10fdfdea",
+        "android_client_info": {
+          "package_name": "com.aaronfabian.maze_conquest_sp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075076269663-j8ucvpeadr54lfmrrqdpdkf1l5po67ai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIThM77kC8XP-6b9Q1TJ3qrIwWFybHO9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075076269663-j8ucvpeadr54lfmrrqdpdkf1l5po67ai.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1075076269663-q9qkn1d9otuvvunu1924qvq4hobu2g2k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mazeConquestSp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
