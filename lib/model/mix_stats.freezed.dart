@@ -20,7 +20,10 @@ MixStats _$MixStatsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MixStats {
-  int? get power => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  int get power => throw _privateConstructorUsedError;
+  String get ownerUsername => throw _privateConstructorUsedError;
+  String get photoUrl => throw _privateConstructorUsedError;
 
   /// Serializes this MixStats to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +40,7 @@ abstract class $MixStatsCopyWith<$Res> {
   factory $MixStatsCopyWith(MixStats value, $Res Function(MixStats) then) =
       _$MixStatsCopyWithImpl<$Res, MixStats>;
   @useResult
-  $Res call({int? power});
+  $Res call({String uid, int power, String ownerUsername, String photoUrl});
 }
 
 /// @nodoc
@@ -55,13 +58,28 @@ class _$MixStatsCopyWithImpl<$Res, $Val extends MixStats>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? power = freezed,
+    Object? uid = null,
+    Object? power = null,
+    Object? ownerUsername = null,
+    Object? photoUrl = null,
   }) {
     return _then(_value.copyWith(
-      power: freezed == power
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      power: null == power
           ? _value.power
           : power // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      ownerUsername: null == ownerUsername
+          ? _value.ownerUsername
+          : ownerUsername // ignore: cast_nullable_to_non_nullable
+              as String,
+      photoUrl: null == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -74,7 +92,7 @@ abstract class _$$MixStatsImplCopyWith<$Res>
       __$$MixStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? power});
+  $Res call({String uid, int power, String ownerUsername, String photoUrl});
 }
 
 /// @nodoc
@@ -90,31 +108,57 @@ class __$$MixStatsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? power = freezed,
+    Object? uid = null,
+    Object? power = null,
+    Object? ownerUsername = null,
+    Object? photoUrl = null,
   }) {
     return _then(_$MixStatsImpl(
-      power: freezed == power
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      power: null == power
           ? _value.power
           : power // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      ownerUsername: null == ownerUsername
+          ? _value.ownerUsername
+          : ownerUsername // ignore: cast_nullable_to_non_nullable
+              as String,
+      photoUrl: null == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$MixStatsImpl implements _MixStats {
-  const _$MixStatsImpl({this.power});
+class _$MixStatsImpl extends _MixStats {
+  const _$MixStatsImpl(
+      {required this.uid,
+      required this.power,
+      required this.ownerUsername,
+      required this.photoUrl})
+      : super._();
 
   factory _$MixStatsImpl.fromJson(Map<String, dynamic> json) =>
       _$$MixStatsImplFromJson(json);
 
   @override
-  final int? power;
+  final String uid;
+  @override
+  final int power;
+  @override
+  final String ownerUsername;
+  @override
+  final String photoUrl;
 
   @override
   String toString() {
-    return 'MixStats(power: $power)';
+    return 'MixStats(uid: $uid, power: $power, ownerUsername: $ownerUsername, photoUrl: $photoUrl)';
   }
 
   @override
@@ -122,12 +166,18 @@ class _$MixStatsImpl implements _MixStats {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MixStatsImpl &&
-            (identical(other.power, power) || other.power == power));
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.power, power) || other.power == power) &&
+            (identical(other.ownerUsername, ownerUsername) ||
+                other.ownerUsername == ownerUsername) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, power);
+  int get hashCode =>
+      Object.hash(runtimeType, uid, power, ownerUsername, photoUrl);
 
   /// Create a copy of MixStats
   /// with the given fields replaced by the non-null parameter values.
@@ -145,14 +195,25 @@ class _$MixStatsImpl implements _MixStats {
   }
 }
 
-abstract class _MixStats implements MixStats {
-  const factory _MixStats({final int? power}) = _$MixStatsImpl;
+abstract class _MixStats extends MixStats {
+  const factory _MixStats(
+      {required final String uid,
+      required final int power,
+      required final String ownerUsername,
+      required final String photoUrl}) = _$MixStatsImpl;
+  const _MixStats._() : super._();
 
   factory _MixStats.fromJson(Map<String, dynamic> json) =
       _$MixStatsImpl.fromJson;
 
   @override
-  int? get power;
+  String get uid;
+  @override
+  int get power;
+  @override
+  String get ownerUsername;
+  @override
+  String get photoUrl;
 
   /// Create a copy of MixStats
   /// with the given fields replaced by the non-null parameter values.

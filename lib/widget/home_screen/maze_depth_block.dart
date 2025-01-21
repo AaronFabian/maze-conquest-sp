@@ -1,7 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maze_conquest_sp/model/world.dart';
-import 'package:maze_conquest_sp/service/user_service.dart';
+import 'package:maze_conquest_sp/service/use_case/user_service.dart';
 import 'package:maze_conquest_sp/widget/tween_number.dart';
 
 class MazeDepthBlock extends StatefulWidget {
@@ -17,17 +18,17 @@ class _MazeDepthBlockState extends State<MazeDepthBlock> {
   World? _maze;
 
   void _getData() async {
-    final maze = await UserService.getUserMazeLevel(widget.user.uid);
+    final result = await UserService(Dio()).getUserMazeLevel(widget.user.uid);
     setState(() {
       _isLoading = false;
-      _maze = maze;
+      _maze = result.value;
     });
   }
 
   @override
   void initState() {
-    _getData();
     super.initState();
+    _getData();
   }
 
   @override
@@ -52,16 +53,16 @@ class _MazeDepthBlockState extends State<MazeDepthBlock> {
               _isLoading
                   ? Text("-",
                       style:
-                          Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 48.0))
+                          Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 48))
                   : TweenNumber(
                       value: _maze?.level.toDouble() ?? 0,
                       style:
-                          Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 48.0))
+                          Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 48))
             ],
           ),
           const SizedBox(height: 2),
           Text(
-            "Average depth of player explored maze is ${23}",
+            "Global avg. maze depth explored is ${23}",
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: Colors.black,
                   fontSize: 12.0,

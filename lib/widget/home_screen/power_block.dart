@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:maze_conquest_sp/service/mix_stats_service.dart';
-import 'package:maze_conquest_sp/service/server_response.dart';
+import 'package:maze_conquest_sp/service/response/server_response.dart';
+import 'package:maze_conquest_sp/service/use_case/mix_stats_service.dart';
 import 'package:maze_conquest_sp/widget/tween_number.dart';
 
 class PowerBlock extends StatefulWidget {
@@ -17,14 +17,14 @@ class _PowerBlockState extends State<PowerBlock> {
   int? userPower;
 
   void _getData() async {
-    final (mixStats, error) = await MixStatsService.getMixStats(widget.user.uid);
-    if (error != null) {
-      ServerResponse.snackBarErrorResponse(context, "Failed to get ${widget.user.displayName} mixStats data");
+    final result = await MixStatsService.getMixStats(widget.user.uid);
+    if (result.error != null) {
+      ServerResponse.snackBarErrorResponse(context, result.error.toString());
       setState(() => _isLoading = false);
       return;
     }
 
-    userPower = mixStats!.power ?? 0;
+    userPower = result.value!.power;
     setState(() => _isLoading = false);
   }
 

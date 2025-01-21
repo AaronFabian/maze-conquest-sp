@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 class ServerResponse {
   int code;
   String status;
-  Map<String, dynamic> data;
+  dynamic data;
 
   ServerResponse(Map<String, dynamic> def)
       : code = def["code"],
