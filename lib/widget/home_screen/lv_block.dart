@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maze_conquest_sp/model/hero.dart' as _;
-import 'package:maze_conquest_sp/service/server_response.dart';
-import 'package:maze_conquest_sp/service/user_service.dart';
+import 'package:maze_conquest_sp/service/response/server_response.dart';
+import 'package:maze_conquest_sp/service/use_case/user_service.dart';
 import 'package:maze_conquest_sp/widget/tween_number.dart';
 
 class LvBlock extends StatefulWidget {
@@ -18,8 +19,8 @@ class _LvBlockState extends State<LvBlock> {
   _.Hero? strongestHero;
 
   void _getData() async {
-    final (hero, error) = await UserService.getUserStrongestHero(widget.user.uid);
-    if (error != null) {
+    final result = await UserService(Dio()).getUserStrongestHero(widget.user.uid);
+    if (result.error != null) {
       ServerResponse.snackBarErrorResponse(context, "Failed to get ${widget.user.displayName} hero data");
       setState(() => _isLoading = false);
       return;
@@ -27,7 +28,7 @@ class _LvBlockState extends State<LvBlock> {
 
     setState(() {
       _isLoading = false;
-      strongestHero = hero;
+      strongestHero = result.value;
     });
   }
 

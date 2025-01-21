@@ -30,7 +30,7 @@ class StatsBlock extends StatelessWidget {
             "STATS",
             style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w800),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:maze_conquest_sp/widget/home_screen/leaderboard_tile.dart';
 import 'package:maze_conquest_sp/widget/user_circle_profile_url.dart';
 
 class LeaderboardBlock extends StatelessWidget {
   final User user;
   const LeaderboardBlock({super.key, required this.user});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -66,35 +66,7 @@ class LeaderboardBlock extends StatelessWidget {
               ),
             ),
             const Divider(color: Colors.black),
-            SizedBox(
-              width: double.infinity,
-              height: 400,
-              child: ListView(
-                children: List.generate(
-                  10,
-                  (i) => const ListTile(
-                    leading: CircleAvatar(child: Text('A')),
-                    title: Text('Headline'),
-                    subtitle: Text('Supporting text'),
-                    trailing: Icon(Icons.favorite_rounded),
-                  ),
-                ),
-              ),
-            ),
-            const Divider(color: Colors.black),
-            TextButton(
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 2),
-                minimumSize: const Size(50, 30),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                alignment: Alignment.centerLeft,
-              ),
-              onPressed: () {
-                print("ok");
-              },
-              child: const Text("Show more"),
-            ),
-            const SizedBox(height: 8)
+            const LeaderboardTile(),
           ],
         ),
       ),
