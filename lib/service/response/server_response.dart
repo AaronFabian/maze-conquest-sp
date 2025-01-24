@@ -29,6 +29,18 @@ class ServerResponse {
     return 'Response{code: $code, status: $status}';
   }
 
+  T? convertData<T>(T Function(Map<String, dynamic>) fromJson) {
+    try {
+      if (data is Map<String, dynamic>) {
+        return fromJson(data as Map<String, dynamic>);
+      }
+      return null;
+    } catch (e) {
+      debugPrint('Error converting data: $e');
+      return null;
+    }
+  }
+
   static void snackBarErrorResponse(BuildContext context, String message,
       {int duration = 2, Color color = Colors.redAccent}) {
     ScaffoldMessenger.of(context).showSnackBar(

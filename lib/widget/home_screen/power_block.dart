@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maze_conquest_sp/service/response/server_response.dart';
@@ -17,7 +18,7 @@ class _PowerBlockState extends State<PowerBlock> {
   int? userPower;
 
   void _getData() async {
-    final result = await MixStatsService.getMixStats(widget.user.uid);
+    final result = await MixStatsService(Dio()).getMixStats(widget.user.uid);
     if (result.error != null) {
       ServerResponse.snackBarErrorResponse(context, result.error.toString());
       setState(() => _isLoading = false);

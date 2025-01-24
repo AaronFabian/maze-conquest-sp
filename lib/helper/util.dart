@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:maze_conquest_sp/helper/error/handled_error.dart';
 import 'package:maze_conquest_sp/service/result.dart';
-import 'package:maze_conquest_sp/service/use_case/mix_stats_service.dart';
 
 Result<T> handleDioException<T>(DioException e) {
+  final logger = Logger();
   final response = e.response;
   if (response != null) {
     switch (response.statusCode) {

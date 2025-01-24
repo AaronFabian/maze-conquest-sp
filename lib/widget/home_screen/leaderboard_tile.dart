@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:maze_conquest_sp/model/mix_stats.dart';
 import 'package:maze_conquest_sp/service/use_case/mix_stats_service.dart';
@@ -32,7 +33,7 @@ class _LeaderboardTileState extends State<LeaderboardTile> {
   }
 
   void _nextPage() async {
-    final result = await MixStatsService.leaderboard(lastCursor);
+    final result = await MixStatsService(Dio()).leaderboard(lastCursor);
     if (result.error != null) {
       return setState(() {
         error = error;
@@ -52,7 +53,7 @@ class _LeaderboardTileState extends State<LeaderboardTile> {
   }
 
   void _getData() async {
-    final result = await MixStatsService.leaderboard(null);
+    final result = await MixStatsService(Dio()).leaderboard(null);
     if (result.error != null) {
       return setState(() {
         error = result.error;

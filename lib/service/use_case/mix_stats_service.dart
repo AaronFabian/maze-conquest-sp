@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 import 'package:maze_conquest_sp/helper/constant.dart';
 import 'package:maze_conquest_sp/helper/error/handled_error.dart';
 import 'package:maze_conquest_sp/helper/util.dart' as helper;
@@ -9,18 +8,17 @@ import 'package:maze_conquest_sp/model/mix_stats.dart';
 import 'package:maze_conquest_sp/service/response/leaderboard_response.dart';
 import 'package:maze_conquest_sp/service/response/server_response.dart';
 import 'package:maze_conquest_sp/service/result.dart';
+import 'package:maze_conquest_sp/service/service.dart';
 
-final logger = Logger();
+class MixStatsService extends Service {
+  MixStatsService(super.dio);
 
-class MixStatsService {
-  static final _dio = Dio(BaseOptions(connectTimeout: const Duration(seconds: 2)));
-
-  static Future<Result<MixStats>> getMixStats(String uid) async {
+  Future<Result<MixStats>> getMixStats(String uid) async {
     try {
-      final response = await _dio.get("$apiUrl/mix_stats/$uid");
+      final response = await dio.get<Map<String, dynamic>>("$apiUrl/mix_stats/$uid");
       if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
 
-      final serverResponse = ServerResponse(response.data as Map<String, dynamic>);
+      final serverResponse = ServerResponse(response.data!);
       final mixStats = MixStats.fromJson(serverResponse.data);
 
       return Result(value: mixStats, error: null);
@@ -37,13 +35,13 @@ class MixStatsService {
     }
   }
 
-  static Future<Result<LeaderboardResponse>> leaderboard(String? uidCursor) async {
+  Future<Result<LeaderboardResponse>> leaderboard(String? uidCursor) async {
     try {
-      final response = await _dio.post("$apiUrl/mix_stats/leaderboard", data: {"uidCursor": uidCursor});
+      final response = await dio.post("$apiUrl/mix_stats/leaderboard", data: {"uidCursor": uidCursor});
       if (response.data == null) throw Exception("Data not found, something gone wrong while fetching leaderboard");
 
       // Here we want the LeaderboardResponse itself because it's unique, and already contain the MixStats we wants
-      final leaderboardResponse = LeaderboardResponse(response.data as Map<String, dynamic>);
+      final leaderboardResponse = LeaderboardResponse(response.data);
 
       return Result(value: leaderboardResponse);
     } on DioException catch (e) {

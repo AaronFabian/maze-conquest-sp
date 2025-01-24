@@ -12,10 +12,10 @@ class UserService extends Service {
 
   Future<Result<Hero>> getUserStrongestHero(String uid) async {
     try {
-      final response = await dio.get("$apiUrl/users/$uid/strongest_hero");
+      final response = await dio.get<Map<String, dynamic>>("$apiUrl/users/$uid/strongest_hero");
       if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
 
-      final serverResponse = ServerResponse(response.data as Map<String, dynamic>);
+      final serverResponse = ServerResponse(response.data!);
       final strongestHero = Hero.fromJson(serverResponse.data);
 
       return Result(value: strongestHero);
@@ -29,10 +29,10 @@ class UserService extends Service {
 
   Future<Result<World>> getUserMazeLevel(String uid) async {
     try {
-      final response = await dio.get("$apiUrl/users/$uid/maze_level");
+      final response = await dio.get<Map<String, dynamic>>("$apiUrl/users/$uid/maze_level");
       if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
 
-      final serverResponse = ServerResponse(response.data);
+      final serverResponse = ServerResponse(response.data!);
       final maze = World.fromJson(serverResponse.data);
 
       return Result(value: maze);
