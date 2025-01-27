@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _router = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/home/all_heroes',
     routes: [
       GoRoute(
         path: '/',

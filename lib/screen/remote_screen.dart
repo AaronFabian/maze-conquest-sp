@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,14 +44,15 @@ class _RemoteScreenState extends State<RemoteScreen> {
       final uid = user.uid;
       // final userName = user.displayName!.replaceAll(RegExp(r'\s+'), '');
       // ws://localhost:8000/api/v1/room/66ac1b8a-19de-49fd-9e4e-0e76fc525b9e/chat/websocket
-      final wsUrl = Uri.parse("ws://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
+      logger.d("Connect with socket: wss://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
+      final wsUrl = Uri.parse("wss://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
       _channel = WebSocketChannel.connect(wsUrl);
 
       _channel.stream.listen(
         (message) {
           // print('Received: $message');
-          final msg = json.decode(message) as Map<String, String?>;
-          switch (msg["command"]) {
+          final msg = json.decode(message) as Map<String, dynamic>;
+          switch (msg["command"] as String) {
             // A message from backend to stop connecting
             case "idleStop":
               _channel.sink.close(status.normalClosure);
@@ -65,6 +69,25 @@ class _RemoteScreenState extends State<RemoteScreen> {
         onDone: () {
           setState(() => socketStatus = SocketStatus.closed);
           logger.i('WebSocket closed. Should tell user and navigate into another screen');
+
+          if (Platform.isIOS) {
+            showCupertinoDialog(
+                context: context,
+                builder: (BuildContext ctx) => AlertDialog(
+                      title: const Text("Remote disconnected"),
+                      content: const Text("The connection with server ended. Back to home screen"),
+                      actions: [TextButton(onPressed: () => ctx.goNamed("home"), child: const Text("OK"))],
+                    ));
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext ctx) => AlertDialog(
+                title: const Text("Remote disconnected"),
+                content: const Text("The connection with server ended. Back to home screen"),
+                actions: [TextButton(onPressed: () => ctx.goNamed("home"), child: const Text("OK"))],
+              ),
+            );
+          }
         },
       );
 

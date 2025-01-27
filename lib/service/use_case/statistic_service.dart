@@ -29,4 +29,25 @@ class StatisticService extends Service {
       return Result(error: Exception("Application crash"));
     }
   }
+
+  Future<Result<List<Statistic>>> getPercentileFromPower(String uid) async {
+    try {
+      final response = await dio.get<Map<String, dynamic>>("$apiUrl/statistics/users/percentile_from_power/$uid");
+      if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
+
+      final serverResponse = ServerResponse(response.data!);
+      if (serverResponse.data is List) {
+        final list = (serverResponse.data as List).map((e) => Map<String, dynamic>.from(e as Map)).toList();
+        final statisticList = Statistic.fromJsonList(list);
+        return Result(value: statisticList);
+      } else {
+        throw Exception("Unexpected data format: Expected a list");
+      }
+    } on DioException catch (e) {
+      return helper.handleDioException(e);
+    } catch (e) {
+      logger.f("Fatal error occurred while fetching statistic->percentile from level", error: e);
+      return Result(error: Exception("Application crash"));
+    }
+  }
 }

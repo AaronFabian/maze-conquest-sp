@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maze_conquest_sp/service/response/server_response.dart';
 import 'package:maze_conquest_sp/service/use_case/mix_stats_service.dart';
+import 'package:maze_conquest_sp/service/use_case/statistic_service.dart';
 import 'package:maze_conquest_sp/widget/tween_number.dart';
 
 class PowerBlock extends StatefulWidget {
@@ -17,6 +18,10 @@ class _PowerBlockState extends State<PowerBlock> {
   bool _isLoading = true;
   int? userPower;
 
+  bool _isStatisticDataLoading = true;
+  double? _userPowerPercentile;
+  double? _usersPowerAverage;
+
   void _getData() async {
     final result = await MixStatsService(Dio()).getMixStats(widget.user.uid);
     if (result.error != null) {
@@ -29,9 +34,26 @@ class _PowerBlockState extends State<PowerBlock> {
     setState(() => _isLoading = false);
   }
 
+  void _getStatistic() async {
+    final result = await StatisticService(Dio()).getPercentileFromPower(widget.user.uid);
+    if (result.error != null) {
+      setState(() => _isStatisticDataLoading = false);
+      return;
+    }
+
+    final userPercentileStatistic = result.value!.firstWhere((statistic) => statistic.label == "user");
+    final usersPowerAverageStatistic = result.value!.firstWhere((statistic) => statistic.label == "power");
+    setState(() {
+      _userPowerPercentile = userPercentileStatistic.value;
+      _usersPowerAverage = usersPowerAverageStatistic.value;
+      _isStatisticDataLoading = false;
+    });
+  }
+
   @override
   void initState() {
     _getData();
+    _getStatistic();
     super.initState();
   }
 
@@ -70,20 +92,17 @@ class _PowerBlockState extends State<PowerBlock> {
             ),
             const SizedBox(height: 2),
             Text(
-              "Global avg. power currently is 278",
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Colors.black,
-                    fontSize: 12.0,
-                  ),
-            ),
-            Text(
-              "Top 1% strongest !",
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Colors.black,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+                "Global avg. power currently is ${_isStatisticDataLoading ? "-" : _usersPowerAverage?.toStringAsFixed(2) ?? "E"}",
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black,
+                      fontSize: 12.0,
+                    )),
+            Text("You are top ${_isStatisticDataLoading ? "-" : _userPowerPercentile?.toStringAsFixed(2) ?? "E"}",
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.black,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                    )),
           ],
         ),
       ),
