@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:maze_conquest_sp/screen/party_screen.dart';
 import 'package:maze_conquest_sp/screen/remote_screen.dart';
 import 'firebase_options.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _router = GoRouter(
-    initialLocation: '/home/all_heroes',
+    initialLocation: '/party',
     routes: [
       GoRoute(
         path: '/',
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           GoRoute(
             path: 'party',
             name: 'party',
-            builder: (context, state) => const Text("Party screen"),
+            builder: (context, state) => const PartyScreen(),
           ),
           GoRoute(
             path: 'inventory',
