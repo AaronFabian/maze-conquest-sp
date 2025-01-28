@@ -71,7 +71,7 @@ class _RemoteScreenState extends State<RemoteScreen> {
       // logger.d("Connect with socket: wss://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
       // final wsUrl = Uri.parse("ws://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
       logger.d("Connect with socket: wss://$urlName/api/v1/ws/$uid${widget.token}");
-      final wsUrl = Uri.parse("ws://$urlName/api/v1/ws/$uid${widget.token}");
+      final wsUrl = Uri.parse("wss://$urlName/api/v1/ws/$uid${widget.token}");
       _channel = WebSocketChannel.connect(wsUrl);
 
       // closure
