@@ -1,12 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:maze_conquest_sp/screen/party_screen.dart';
-import 'package:maze_conquest_sp/screen/remote_screen.dart';
-import 'firebase_options.dart';
-
-import 'package:maze_conquest_sp/screen/login_screen.dart';
 import 'package:maze_conquest_sp/screen/home_screen.dart';
+import 'package:maze_conquest_sp/screen/login_screen.dart';
+import 'package:maze_conquest_sp/screen/remote_screen.dart';
+
+import 'firebase_options.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 235, 235, 240),
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _router = GoRouter(
-    initialLocation: '/party',
+    initialLocation: '/',
     routes: [
       GoRoute(
         path: '/',
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
           GoRoute(
             path: 'party',
             name: 'party',
-            builder: (context, state) => const PartyScreen(),
+            builder: (context, state) => const Text("Party screen"),
           ),
           GoRoute(
             path: 'inventory',
