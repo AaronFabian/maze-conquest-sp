@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:maze_conquest_sp/widget/home_screen/leaderboard_tile.dart';
-import 'package:maze_conquest_sp/widget/user_circle_profile_url.dart';
+import 'package:maze_conquest_sp/widget/home_screen/user_leaderboard.dart';
 
 class LeaderboardBlock extends StatelessWidget {
   final User user;
@@ -18,54 +18,12 @@ class LeaderboardBlock extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Column(
-                children: [
-                  userCircleProfileUrl(user),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Rank #${1}",
-                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                        Text(
-                          "Top ${1}%",
-                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${1280} points",
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey),
-                        ),
-                        Text(
-                          "${1} Out of 1225 players",
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // 01
+            UserLeaderboard(user: user),
+
             const Divider(color: Colors.black),
+
+            // 02
             const LeaderboardTile(),
           ],
         ),

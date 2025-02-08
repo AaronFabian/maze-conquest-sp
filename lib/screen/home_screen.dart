@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 6.0),
               AvatarLabel(user: user),
-              const ProgressBlock(),
+              ProgressBlock(user: user),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.count(
