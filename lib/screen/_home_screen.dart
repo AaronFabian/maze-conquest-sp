@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maze_conquest_sp/widget/background_gradient.dart';
 import 'package:maze_conquest_sp/widget/cloud_background.dart';
-import 'package:maze_conquest_sp/widget/home_screen/navigation_button.dart';
-import 'package:maze_conquest_sp/widget/home_screen/navigation_info.dart';
+import 'package:maze_conquest_sp/widget/home_screen/_navigation_button.dart';
+import 'package:maze_conquest_sp/widget/home_screen/_navigation_info.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

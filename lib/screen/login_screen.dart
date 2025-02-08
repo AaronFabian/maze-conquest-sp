@@ -31,7 +31,10 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(fontFamily: 'zig', fontSize: 14),
                 ),
                 const SizedBox(height: 32),
+
+                // All the login logic here
                 const LoginButton(),
+
                 const SizedBox(height: 32),
                 companyLabel(context),
               ],

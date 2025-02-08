@@ -65,11 +65,10 @@ class _RemoteScreenState extends State<RemoteScreen> {
     try {
       if (widget.token == null) throw Exception("Unexpected error, token not provided");
 
+      // 01
       final uid = user.uid;
-      // final userName = user.displayName!.replaceAll(RegExp(r'\s+'), '');
-      // ws://localhost:8000/api/v1/room/66ac1b8a-19de-49fd-9e4e-0e76fc525b9e/chat/websocket
-      // logger.d("Connect with socket: wss://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
-      // final wsUrl = Uri.parse("ws://$urlName/api/v1/room/$uid${widget.token}/chat/websocket");
+
+      // 02
       logger.d("Connect with socket: wss://$urlName/api/v1/ws/$uid${widget.token}");
       final wsUrl = Uri.parse("wss://$urlName/api/v1/ws/$uid${widget.token}");
       _channel = WebSocketChannel.connect(wsUrl);
