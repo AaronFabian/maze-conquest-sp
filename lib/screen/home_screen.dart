@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:maze_conquest_sp/widget/home_screen/avatar_label.dart';
 import 'package:maze_conquest_sp/widget/home_screen/leaderboard_block.dart';
 import 'package:maze_conquest_sp/widget/home_screen/lv_block.dart';

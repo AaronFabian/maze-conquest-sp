@@ -15,7 +15,7 @@ class LeaderboardService extends Service {
   Future<Result<Leaderboard>> getLeaderboard(String uid) async {
     try {
       final response = await dio.get<Map<String, dynamic>>("$apiUrl/statistics/users/leaderboard/$uid");
-      if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
+      if (response.data == null) return Result(error: Exception("Data not found; something gone wrong while fetching"));
 
       final serverResponse = ServerResponse(response.data!);
       final mixStats = Leaderboard.fromJson(serverResponse.data);

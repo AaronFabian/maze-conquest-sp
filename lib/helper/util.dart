@@ -17,7 +17,9 @@ Result<T> handleDioException<T>(DioException e) {
       case 400:
         return Result(error: HandledError(response.data["message"]));
       default:
-        logger.f("Fatal crash, unhandled response error while fetching leaderboard data; DioException", error: e);
+        var statusCode = response.statusCode;
+        logger.f("($statusCode) Fatal crash, unhandled response error while fetching leaderboard data; DioException",
+            error: e);
         return Result(error: HandledError("Application crash"));
     }
   }

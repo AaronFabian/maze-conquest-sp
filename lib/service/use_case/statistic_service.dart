@@ -12,7 +12,7 @@ class StatisticService extends Service {
   Future<Result<List<Statistic>>> getPercentileFromLevel(String uid) async {
     try {
       final response = await dio.get<Map<String, dynamic>>("$apiUrl/statistics/users/percentile_from_level/$uid");
-      if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
+      if (response.data == null) return Result(error: Exception("Data not found; something gone wrong while fetching"));
 
       final serverResponse = ServerResponse(response.data!);
       if (serverResponse.data is List) {
@@ -33,7 +33,7 @@ class StatisticService extends Service {
   Future<Result<List<Statistic>>> getPercentileFromPower(String uid) async {
     try {
       final response = await dio.get<Map<String, dynamic>>("$apiUrl/statistics/users/percentile_from_power/$uid");
-      if (response.data == null) throw Exception("Data not found; something gone wrong while fetching");
+      if (response.data == null) return Result(error: Exception("Data not found; something gone wrong while fetching"));
 
       final serverResponse = ServerResponse(response.data!);
       if (serverResponse.data is List) {

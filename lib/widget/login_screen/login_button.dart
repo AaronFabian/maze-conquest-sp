@@ -30,6 +30,7 @@ class _LoginButtonState extends State<LoginButton> {
         idToken: googleAuth.idToken,
         accessToken: googleAuth.accessToken,
       );
+      print("Check point 1");
 
       // Sign in the user with Firebase
       final UserCredential userCredential = await _auth.signInWithCredential(credential);

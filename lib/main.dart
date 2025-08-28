@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,6 +33,13 @@ class MyApp extends StatelessWidget {
         path: '/',
         name: 'home',
         builder: (context, state) => const HomeScreen(),
+        redirect: (context, state) {
+          final user = FirebaseAuth.instance.currentUser;
+          print(user);
+          if (user == null) return '/login';
+          print(user.uid);
+          return null;
+        },
         routes: [
           GoRoute(
             path: 'remote_map/:token',

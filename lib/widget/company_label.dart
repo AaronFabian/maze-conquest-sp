@@ -13,7 +13,7 @@ Widget companyLabel(BuildContext context) {
         ),
         const SizedBox(width: 8.0),
         Text(
-          "International Paradigm",
+          "Aaron Fabian Saputra",
           style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.white),
         ),
       ],
