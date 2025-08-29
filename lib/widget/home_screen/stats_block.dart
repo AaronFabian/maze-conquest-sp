@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class StatsBlock extends StatelessWidget {
   const StatsBlock({super.key});
@@ -13,6 +14,18 @@ class StatsBlock extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
     );
+  }
+
+  void _onLogout(BuildContext context) async {
+    try {
+      final auth = FirebaseAuth.instance;
+      final googleSignIn = GoogleSignIn();
+      await googleSignIn.signOut();
+      await auth.signOut();
+      context.goNamed("login");
+    } catch (e) {
+      _showHelpUsingSnackBar(context, "Failed to logout !");
+    }
   }
 
   @override
@@ -72,15 +85,7 @@ class StatsBlock extends StatelessWidget {
                   icon: const Icon(Icons.logout),
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
-                  onPressed: () async {
-                    try {
-                      final auth = FirebaseAuth.instance;
-                      await auth.signOut();
-                      context.goNamed("login");
-                    } catch (e) {
-                      _showHelpUsingSnackBar(context, "Failed to logout !");
-                    }
-                  },
+                  onPressed: () => _onLogout(context),
                 ),
               ),
             ],

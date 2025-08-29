@@ -35,9 +35,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => const HomeScreen(),
         redirect: (context, state) {
           final user = FirebaseAuth.instance.currentUser;
-          print(user);
           if (user == null) return '/login';
-          print(user.uid);
           return null;
         },
         routes: [
