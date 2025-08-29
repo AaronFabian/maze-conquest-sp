@@ -1,0 +1,2 @@
+E:/code/pro/maze-conquest-community/maze_conquest_sp/android/app/.cxx/RelWithDebInfo/5x6t3vf6/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/code/pro/maze-conquest-community/maze_conquest_sp/android/app/.cxx/RelWithDebInfo/5x6t3vf6/arm64-v8a/CMakeFiles/rebuild_cache.dir

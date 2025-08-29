@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "E:\\path\\flutter\\packages\\flutter_tools\\gradle\\src\\main\\groovy\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\aaron\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "E:\\code\\pro\\maze-conquest-community\\maze_conquest_sp\\android\\app\\.cxx\\RelWithDebInfo\\5x6t3vf6\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\aaron\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "E:\\code\\pro\\maze-conquest-community\\maze_conquest_sp\\android\\app\\.cxx\\RelWithDebInfo\\5x6t3vf6\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
